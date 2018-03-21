@@ -230,7 +230,7 @@ class Master:
         """
         hello = CtrlPkg.pbuild_hs_m2s().raw
         conn_slaver.send(hello)
-        log.debug('sent hello to slaver {}, len {}'.format(conn_slaver, hello))
+        log.debug('sent hello to slaver {}, len {}'.format(conn_slaver, len(hello)))
 
         buff = select_recv(conn_slaver, CtrlPkg.PACKAGE_SIZE, 5)
         if buff is None:
