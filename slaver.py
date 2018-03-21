@@ -100,7 +100,7 @@ class Slaver:
             # which means if not receive pkg from master in SPARE_SLAVER_TTL seconds,
             #   this connection would expire and re-connect
             pkg, verify = CtrlPkg.recv(conn_slaver, SPARE_SLAVER_TTL)  # type: CtrlPkg,bool
-
+            log.debug('recv master hello {0}, verify {1}'.format(pkg, verify))
             if not verify:
                 return False
 
@@ -127,6 +127,9 @@ class Slaver:
         log.info("slaver complete: {}".format(addr_slaver))
 
     def _slaver_working(self, conn_slaver):
+        """
+        客户端和服务端建立链接之后等待服务端握手和使用
+        """
         addr_slaver = conn_slaver.getsockname()
         addr_master = conn_slaver.getpeername()
 

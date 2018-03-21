@@ -229,6 +229,7 @@ class Master:
             5. enter real data transfer
         """
         conn_slaver.send(CtrlPkg.pbuild_hs_m2s().raw)
+        log.debug('sent hello to slaver {}'.format(conn_slaver))
 
         buff = select_recv(conn_slaver, CtrlPkg.PACKAGE_SIZE, 5)
         if buff is None:
