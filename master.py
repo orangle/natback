@@ -26,7 +26,7 @@ def try_bind_port(sock, addr):
                        "then don't worry, it would be available in several seconds\n"
                        "we'll keep trying....").format(addr, e))
             log.debug(traceback.format_exc())
-            time.sleep(3)
+            time.sleep(5)
         else:
             break
 
@@ -305,8 +305,9 @@ class Master:
 
     def _listen_slaver(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try_bind_port(sock, self.communicate_addr)
-        sock.listen(10)
+        sock.listen(100)
         _listening_sockets.append(sock)
         log.info("Listening for slavers: {}".format(
             fmt_addr(self.communicate_addr)))
@@ -322,6 +323,7 @@ class Master:
 
     def _listen_customer(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try_bind_port(sock, self.customer_listen_addr)
         sock.listen(20)
         _listening_sockets.append(sock)
