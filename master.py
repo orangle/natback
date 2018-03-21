@@ -230,7 +230,7 @@ class Master:
         """
         conn_slaver.send(CtrlPkg.pbuild_hs_m2s().raw)
 
-        buff = select_recv(conn_slaver, CtrlPkg.PACKAGE_SIZE, 2)
+        buff = select_recv(conn_slaver, CtrlPkg.PACKAGE_SIZE, 5)
         if buff is None:
             return False
 
@@ -311,6 +311,7 @@ class Master:
         _listening_sockets.append(sock)
         log.info("Listening for slavers: {}".format(
             fmt_addr(self.communicate_addr)))
+
         while True:
             conn, addr = sock.accept()
             self.slaver_pool.append({
@@ -325,7 +326,7 @@ class Master:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try_bind_port(sock, self.customer_listen_addr)
-        sock.listen(20)
+        sock.listen(100)
         _listening_sockets.append(sock)
         log.info("Listening for customers: {}".format(
             fmt_addr(self.customer_listen_addr)))

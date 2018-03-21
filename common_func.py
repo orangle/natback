@@ -102,8 +102,7 @@ def select_recv(conn, buff_size, timeout=None):
 
     buff = conn.recv(buff_size)
     if not buff:
-        raise RuntimeError("received zero bytes, socket was closed")
-
+        raise RuntimeError("received zero bytes, socket was closed, %s" % buff)
     return buff
 
 
