@@ -4,8 +4,8 @@ from __future__ import print_function, unicode_literals, division, absolute_impo
 
 from common_func import *
 
-__author__ = "Aploium <i@z.codes>"
-__website__ = "https://github.com/aploium/shootback"
+__author__ =  "Aploium <i@z.codes> orangleliu<orangleliu@gmai.com>"
+__website__ = "https://github.com/orangle/natback"
 
 
 class Slaver:

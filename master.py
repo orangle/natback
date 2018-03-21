@@ -5,8 +5,8 @@ import queue
 import atexit
 
 _listening_sockets = []  # for close at exit
-__author__ = "Aploium <i@z.codes>"
-__website__ = "https://github.com/aploium/shootback"
+__author__ = "Aploium <i@z.codes> orangleliu<orangleliu@gmai.com>"
+__website__ = "https://github.com/orangle/natback"
 
 
 @atexit.register

@@ -1,11 +1,13 @@
 # shootback
 
-shootback is a reverse TCP tunnel let you access target behind NAT or firewall  
+> shootback is a reverse TCP tunnel let you access target behind NAT or firewall  
+
 反向TCP隧道, 使得NAT或防火墙后的内网机器可以被外网访问.  
+
 Consumes less than 1% CPU and 8MB memory under 800 concurrency.  
 slaver is __single file__ and only depends on python(3.4+) standard library.
 
-!!! DO NOT USEING Python2.x, many bugs
+**!!! DO NOT USEING Python2.x, many bugs**
 
 ## How it works
 
@@ -29,9 +31,9 @@ slaver is __single file__ and only depends on python(3.4+) standard library.
 
 1. requirement:
     * Master: Python3.4+, OS independent
-    * Slaver: Python2.7/3.4+, OS independent
+    * Slaver: Python3.4+, OS independent
     * no external dependencies, only python std lib
-2. download `git clone https://github.com/aploium/shootback`
+2. download `git clone https://github.com/orangle/natback.git`
 3. (optional) if you need a single-file slaver.py, run `python3 build_singlefile_slaver.py`
 4. run these command
     ```bash
