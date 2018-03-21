@@ -100,20 +100,18 @@ class Slaver:
             # which means if not receive pkg from master in SPARE_SLAVER_TTL seconds,
             #   this connection would expire and re-connect
             pkg, verify = CtrlPkg.recv(conn_slaver, SPARE_SLAVER_TTL)  # type: CtrlPkg,bool
-            log.debug('recv master hello {0}, verify {1}'.format(pkg, verify))
+            log.debug("recv CtrlPkg from {}: pkg {}: verify: {}".format(
+                      conn_slaver.getpeername(), pkg, verify))
+
             if not verify:
                 return False
-
-            log.debug("CtrlPkg from {}: {}".format(conn_slaver.getpeername(), pkg))
 
             if pkg.pkg_type == CtrlPkg.PTYPE_HEART_BEAT:
                 # if the pkg is heartbeat pkg, enter handshake procedure
                 if not self._response_heartbeat(conn_slaver, pkg):
                     return False
-
             elif pkg.pkg_type == CtrlPkg.PTYPE_HS_M2S:
                 # 拿到了开始传输的握手包, 进入工作阶段
-
                 break
 
         # send slaver hello --> master

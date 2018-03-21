@@ -228,15 +228,15 @@ class Master:
             4. master verify slaver
             5. enter real data transfer
         """
-        conn_slaver.send(CtrlPkg.pbuild_hs_m2s().raw)
-        log.debug('sent hello to slaver {}'.format(conn_slaver))
+        hello = CtrlPkg.pbuild_hs_m2s().raw
+        conn_slaver.send(hello)
+        log.debug('sent hello to slaver {}, len {}'.format(conn_slaver, hello))
 
         buff = select_recv(conn_slaver, CtrlPkg.PACKAGE_SIZE, 5)
         if buff is None:
             return False
 
         pkg, verify = CtrlPkg.decode_verify(buff, CtrlPkg.PTYPE_HS_S2M)  # type: CtrlPkg,bool
-
         log.debug("CtrlPkg from slaver {}: {}".format(conn_slaver.getpeername(), pkg))
 
         return verify
